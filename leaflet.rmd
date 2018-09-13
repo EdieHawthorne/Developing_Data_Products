@@ -1,0 +1,56 @@
+---
+title: "Leaflet"
+author: "Edie Hawthorne"
+date: "9/12/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Summary
+
+This project is to create an interactive custom map for Orlando Dianey Studios.
+
+## Create custom icon and popups
+
+Creating custom icons and popups for the Hollywood studios, Epcot Theme Park, Animal Kingdom and Magic Kingdom Theme Parks.
+
+```{r load, echo=TRUE}
+library(leaflet)
+set.seed(2018-09-12)
+disneyLatLng <- data.frame(lat = c(28.3575, 28.3597, 28.3747, 28.4177), 
+                 lng = c(-81.5583, -81.5494, -81.5913,  -81.5812))
+
+disneyIcon <- makeIcon(
+    iconUrl = "https://static1.squarespace.com/static/55f87b70e4b04ad8ee195f88/5746b6d48259b543b3ff6e2a/5746b6f259827edb581deaed/1464252164735/MICKEYICON.png",
+    iconWidth = 31*215/230, iconHeight = 31,
+    iconAnchorX = 31*215/230/2, iconAnchorY = 16
+)
+
+disneysites <- c(
+    "<a href='https://disneyworld.disney.go.com/destinations/hollywood-studios/'> 
+    Hollywood Studios </a>",
+    "<a href='https://disneyworld.disney.go.com/destinations/epcot/'> 
+    Epcot Theme Park </a>",
+    "<a href= 'https://disneyworld.disney.go.com/destinations/animal-kingdom/'> 
+    Animal Kindom Theme Park </a>",
+    "<a href='https://disneyworld.disney.go.com/destinations/magic-kingdom/'>
+    Magic Kingdom Theme Park </a>"
+)
+
+```
+
+## Creating Disney Interactive Map
+
+Adding the custom icons and popups to the disney map.
+
+```{r pressure, echo=FALSE}
+disneyLatLng %>% 
+    leaflet() %>%
+    addTiles() %>%
+    addMarkers(icon=disneyIcon, popup = disneysites) %>%
+    addRectangles(lat1=28.35, lng1=-81.6, lat2=28.45, lng2=-81.5) 
+```
+
