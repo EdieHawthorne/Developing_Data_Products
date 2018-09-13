@@ -1,0 +1,38 @@
+---
+title: "Poorly"
+author: "Edie Hawthorne"
+date: "9/12/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Summary
+
+This is a project to use plotly package to plot mtcars data
+
+```{r load, echo=TRUE}
+library(plotly)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+data("mtcars")
+
+df <- data.frame(mtcars)
+g <- ggplot(data=df, aes(x=wt, y=mpg))
+```
+
+## Use Plotly to plot the data
+
+Use Plotly package to plot the weight and miles per gallon variables in order to analyze the changes of weight miles per gallon.
+
+```{r pressure, echo=FALSE}
+p <- g + geom_point() + geom_smooth(aes(color=(cyl)) + facet_wrap(~cyl)) + 
+    ggtitle("Weight Changes Miles per Gallon")
+
+gg <- ggplotly(p)
+gg
+```
+
